@@ -35,6 +35,7 @@ export default function CartProvider({ children }) {
   useEffect(() => {
     if (itemIds.length === 0) {
       setCartItemsData([]);
+      setLoading(false);
       return;
     }
 
