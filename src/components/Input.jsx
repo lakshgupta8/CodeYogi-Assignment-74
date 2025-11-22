@@ -26,7 +26,10 @@ function Input({
 }) {
   const icon = iconMap[name] || null;
 
-  let borderClass = touched && error ? "border-primary-medium" : "border-white placeholder-white";
+  let borderClass =
+    touched && error
+      ? "border-primary-medium"
+      : "border-white placeholder-white";
   if (id == "search") borderClass = "border-gray-600";
   const combinedClassName = `${className} ${borderClass}`.trim();
 
