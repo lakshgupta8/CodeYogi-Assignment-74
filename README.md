@@ -85,7 +85,7 @@ Video 74/
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd "Video 74"
+   cd "CodeYogi-Assignment-74"
    ```
 
 2. **Install dependencies**
