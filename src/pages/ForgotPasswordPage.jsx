@@ -7,7 +7,6 @@ import Input from "../components/Input";
 
 function callForgotPasswordApi(values, { setSubmitting, props }) {
   const { navigate } = props;
-  console.log("Password reset requested for:", values.email);
   alert(`Password reset link sent to ${values.email}`);
   navigate("/login");
   setSubmitting(false);

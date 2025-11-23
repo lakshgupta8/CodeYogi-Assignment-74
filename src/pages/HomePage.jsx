@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import Filter from "../components/Filter.jsx";
 import ProductGrid from "../components/ProductGrid.jsx";
 import Pagination from "../components/Pagination.jsx";
