@@ -1,26 +1,39 @@
-import { memo } from "react";
+import { memo, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaAmazon } from "react-icons/fa";
 import { withFormik } from "formik";
 import * as Yup from "yup";
 import Input from "../components/Input";
+import { UserContext } from "../context/UserContext.js";
 
 function callLoginApi(values, { setSubmitting, props }) {
   const navigate = props.navigate;
-  console.log("Logging in with:", values.username, values.password);
-  navigate("/");
+  const login = props.login;
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFhYWFhYWFhQGdtYWlsLmNvbSIsImlkIjoiMDE5YWIxNmMtOGFkOC03MWQwLWFjMzUtZjI2NjZkMDY2OGIxIiwiaWF0IjoxNzYzOTEzMjcyLCJleHAiOjE3NjQ1MTgwNzJ9.Ds36Uzv6Wc05_WnTn--MH-2yh2WgNBTaRmFbKwSbSc4";
+
+  login(null, token);
+  navigate("/dashboard");
   setSubmitting(false);
 }
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required("Username is required"),
+  email: Yup.string()
+    .required("Email is required")
+    .email("Invalid email format"),
   password: Yup.string()
     .required("Password is required")
-    .min(8, "Password must be at least 8 characters long"),
+    .min(8, "Password must be at least 8 characters long")
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .matches(
+      /[^a-zA-Z0-9]/,
+      "Password must contain at least one special character"
+    )
+    .matches(/[0-9]/, "Password must contain at least one number"),
 });
 
 const initialValues = {
-  username: "",
+  email: "",
   password: "",
 };
 
@@ -59,14 +72,14 @@ export const LoginPage = memo(
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-              id="username"
-              name="username"
-              type="text"
-              placeholder="Username"
-              autoComplete="username"
-              value={values.username}
-              error={errors.username}
-              touched={touched.username}
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Email"
+              autoComplete="email"
+              value={values.email}
+              error={errors.email}
+              touched={touched.email}
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -123,5 +136,6 @@ const EnhancedLoginPage = withFormik({
 
 export default function LoginPageWithNavigate() {
   const navigate = useNavigate();
-  return <EnhancedLoginPage navigate={navigate} />;
+  const { login } = useContext(UserContext);
+  return <EnhancedLoginPage navigate={navigate} login={login} />;
 }

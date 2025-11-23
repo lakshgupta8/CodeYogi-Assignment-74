@@ -1,4 +1,3 @@
-// ForgotPasswordPage.jsx
 import { memo } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaAmazon } from "react-icons/fa";

@@ -8,7 +8,7 @@ import {
 } from "react-icons/hi";
 
 const iconMap = {
-  username: <HiOutlineUser className="w-5 h-5" />,
+  Name: <HiOutlineUser className="w-5 h-5" />,
   email: <HiOutlineMail className="w-5 h-5" />,
   password: <HiOutlineLockOpen className="w-5 h-5" />,
   confirmPassword: <HiOutlineLockClosed className="w-5 h-5" />,

@@ -15,7 +15,7 @@ function Navbar() {
       { name: "ALL PRODUCTS", to: "/products" },
       { name: "ABOUT", to: "/about" },
       { name: "CONTACT", to: "/contact" },
-      { name: "ACCOUNT  ↯", to: "/login" },
+      { name: "ACCOUNT  ↯", to: "/dashboard" },
     ],
     []
   );

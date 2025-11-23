@@ -1,40 +1,51 @@
-import { memo } from "react";
+import { memo, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaAmazon } from "react-icons/fa";
 import { withFormik } from "formik";
 import * as Yup from "yup";
 import Input from "../components/Input";
+import { addUser } from "../api";
+import { UserContext } from "../context/UserContext.js";
 
 function callSignupApi(values, { setSubmitting, props }) {
-  const { navigate } = props;
-  console.log(
-    "Signing up with:",
-    values.username,
-    values.email,
-    values.password
-  );
-  alert(
-    `Account created for ${values.username}.\nVerification link sent to ${values.email}`
-  );
-  navigate("/");
-  setSubmitting(false);
+  const navigate = props.navigate;
+  const login = props.login;
+
+  addUser(values.Name.split(" ")[0], values.email, values.password)
+    .then(({ user, token }) => {
+      login(user, token);
+      navigate("/dashboard");
+    })
+    .catch((error) => {
+      const errorMessage = error.message || "Signup failed";
+      alert(errorMessage);
+    })
+    .finally(() => {
+      setSubmitting(false);
+    });
 }
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required("Username is required"),
+  Name: Yup.string().required("Name is required"),
   email: Yup.string()
     .required("Email is required")
     .email("Invalid email format"),
   password: Yup.string()
     .required("Password is required")
-    .min(8, "Password must be at least 8 characters long"),
+    .min(8, "Password must be at least 8 characters long")
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .matches(
+      /[^a-zA-Z0-9]/,
+      "Password must contain at least one special character"
+    )
+    .matches(/[0-9]/, "Password must contain at least one number"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Confirm Password is required"),
 });
 
 const initialValues = {
-  username: "",
+  Name: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -75,14 +86,14 @@ export const SignUpPage = memo(
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-              id="username"
-              name="username"
+              id="Name"
+              name="Name"
               type="text"
-              placeholder="Username"
-              autoComplete="username"
-              value={values.username}
-              error={errors.username}
-              touched={touched.username}
+              placeholder="Name"
+              autoComplete="Name"
+              value={values.Name}
+              error={errors.Name}
+              touched={touched.Name}
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -159,5 +170,6 @@ const EnhancedSignUpPage = withFormik({
 
 export default function SignUpPageWithNavigate() {
   const navigate = useNavigate();
-  return <EnhancedSignUpPage navigate={navigate} />;
+  const { login } = useContext(UserContext);
+  return <EnhancedSignUpPage navigate={navigate} login={login} />;
 }

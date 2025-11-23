@@ -1,15 +1,6 @@
-import {
-  createContext,
-  useState,
-  useMemo,
-  useCallback,
-  useEffect,
-} from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { getProduct } from "../api";
-
-const CartContext = createContext(undefined);
-
-export { CartContext };
+import { CartContext } from "./CartContext.js";
 
 export default function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState(() => {
