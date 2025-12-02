@@ -24,14 +24,15 @@ An e-commerce web application built with React, Vite, and Tailwind CSS featuring
 
 ## 🛠️ Tech Stack
 
-- **Framework**: React 19.1
-- **Build Tool**: Vite 7.1
-- **Styling**: Tailwind CSS 4.1
-- **Routing**: React Router DOM 6.30
-- **HTTP Client**: Axios 1.12
-- **Form Management**: Formik 2.4 + Yup 1.7
-- **Icons**: Lucide React 0.546 + React Icons 5.5
-- **Package Manager**: pnpm
+-   **Frontend Framework**: [React](https://reactjs.org/) (v18+)
+-   **Build Tool**: [Vite](https://vitejs.dev/)
+-   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+-   **Routing**: [React Router DOM](https://reactrouter.com/)
+-   **State Management**: React Context API (`UserContext`, `CartContext`, `AlertContext`)
+-   **HTTP Client**: [Axios](https://axios-http.com/)
+-   **Form Handling**: [Formik](https://formik.org/) & [Yup](https://github.com/jquense/yup)
+-   **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
+-   **Package Manager**: [pnpm](https://pnpm.io/)
 
 ## 📁 Project Structure
 
@@ -84,7 +85,7 @@ CodeYogi-Assignment-74/
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/lakshgupta8/CodeYogi-Assignment-74
    cd "CodeYogi-Assignment-74"
    ```
 
