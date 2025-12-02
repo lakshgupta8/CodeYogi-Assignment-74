@@ -36,7 +36,7 @@ An e-commerce web application built with React, Vite, and Tailwind CSS featuring
 ## 📁 Project Structure
 
 ```
-Video 74/
+CodeYogi-Assignment-74/
 ├── src/
 │   ├── components/          # Reusable UI components
 │   │   ├── Navbar.jsx
